@@ -13,6 +13,14 @@
 		B6B8867928D82F4D00FD8176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6B8867728D82F4D00FD8176 /* Main.storyboard */; };
 		B6B8867B28D82F5200FD8176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6B8867A28D82F5200FD8176 /* Assets.xcassets */; };
 		B6B8867E28D82F5200FD8176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6B8867C28D82F5200FD8176 /* LaunchScreen.storyboard */; };
+		B6B8868728D831DA00FD8176 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = B6B8868628D831DA00FD8176 /* Realm */; };
+		B6B8868928D831DA00FD8176 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B6B8868828D831DA00FD8176 /* RealmSwift */; };
+		B6B8868B28D8333200FD8176 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8868A28D8333200FD8176 /* ListViewController.swift */; };
+		B6B8868D28D8338000FD8176 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8868C28D8338000FD8176 /* DetailViewController.swift */; };
+		B6B8868F28D8339100FD8176 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8868E28D8339100FD8176 /* AddViewController.swift */; };
+		B6B8869128D833EA00FD8176 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8869028D833EA00FD8176 /* TopViewController.swift */; };
+		B6B8869328D834B100FD8176 /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8869228D834B100FD8176 /* Year.swift */; };
+		B6B8869528DB73E500FD8176 /* AddYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8869428DB73E500FD8176 /* AddYearViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,12 @@
 		B6B8867A28D82F5200FD8176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6B8867D28D82F5200FD8176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6B8867F28D82F5200FD8176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6B8868A28D8333200FD8176 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		B6B8868C28D8338000FD8176 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B6B8868E28D8339100FD8176 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		B6B8869028D833EA00FD8176 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		B6B8869228D834B100FD8176 /* Year.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
+		B6B8869428DB73E500FD8176 /* AddYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddYearViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6B8868928D831DA00FD8176 /* RealmSwift in Frameworks */,
+				B6B8868728D831DA00FD8176 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +79,12 @@
 				B6B8867A28D82F5200FD8176 /* Assets.xcassets */,
 				B6B8867C28D82F5200FD8176 /* LaunchScreen.storyboard */,
 				B6B8867F28D82F5200FD8176 /* Info.plist */,
+				B6B8868A28D8333200FD8176 /* ListViewController.swift */,
+				B6B8868C28D8338000FD8176 /* DetailViewController.swift */,
+				B6B8868E28D8339100FD8176 /* AddViewController.swift */,
+				B6B8869028D833EA00FD8176 /* TopViewController.swift */,
+				B6B8869228D834B100FD8176 /* Year.swift */,
+				B6B8869428DB73E500FD8176 /* AddYearViewController.swift */,
 			);
 			path = LAOriginal;
 			sourceTree = "<group>";
@@ -83,6 +105,10 @@
 			dependencies = (
 			);
 			name = LAOriginal;
+			packageProductDependencies = (
+				B6B8868628D831DA00FD8176 /* Realm */,
+				B6B8868828D831DA00FD8176 /* RealmSwift */,
+			);
 			productName = LAOriginal;
 			productReference = B6B8866E28D82F4D00FD8176 /* LAOriginal.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +137,9 @@
 				Base,
 			);
 			mainGroup = B6B8866528D82F4D00FD8176;
+			packageReferences = (
+				B6B8868528D831DA00FD8176 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = B6B8866F28D82F4D00FD8176 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -140,7 +169,13 @@
 			files = (
 				B6B8867628D82F4D00FD8176 /* ViewController.swift in Sources */,
 				B6B8867228D82F4D00FD8176 /* AppDelegate.swift in Sources */,
+				B6B8869528DB73E500FD8176 /* AddYearViewController.swift in Sources */,
+				B6B8868F28D8339100FD8176 /* AddViewController.swift in Sources */,
+				B6B8868D28D8338000FD8176 /* DetailViewController.swift in Sources */,
+				B6B8868B28D8333200FD8176 /* ListViewController.swift in Sources */,
 				B6B8867428D82F4D00FD8176 /* SceneDelegate.swift in Sources */,
+				B6B8869328D834B100FD8176 /* Year.swift in Sources */,
+				B6B8869128D833EA00FD8176 /* TopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +391,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B6B8868528D831DA00FD8176 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B6B8868628D831DA00FD8176 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6B8868528D831DA00FD8176 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		B6B8868828D831DA00FD8176 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6B8868528D831DA00FD8176 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6B8866628D82F4D00FD8176 /* Project object */;
 }
