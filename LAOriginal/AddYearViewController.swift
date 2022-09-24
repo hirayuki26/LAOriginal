@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import DropDown
 
 class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -17,6 +18,8 @@ class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet var pickerView: UIPickerView!
     
     let years = (1950...2030).map { $0 }
+    
+    let newYear = Year()
     
 //    var datePicker: UIDatePicker = UIDatePicker()
 
@@ -82,19 +85,17 @@ class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     didSelectRow row: Int,
                     inComponent component: Int) {
         
+        newYear.displayName = years[row]
         yearTextLabel.text = String(years[row])
     }
     
     @IBAction func done() {
         
-        let newYear = Year()
-        newYear.displeyName = Int(yearTextLabel.text ?? 2022!)
-        
         print("あ")
         
         try! realm.write {
             realm.add(newYear)
-            print(newYear.displeyName)
+            print(newYear.displayName)
             print("success")
         }
         

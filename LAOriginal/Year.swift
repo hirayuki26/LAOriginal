@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class Year: Object {
-    @objc dynamic var displeyName: Int!
+    @objc dynamic var displayName: Int = 2022
     let stories = List<Story>()
 }
 

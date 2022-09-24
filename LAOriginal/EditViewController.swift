@@ -1,19 +1,19 @@
 //
-//  AddViewController.swift
+//  EditViewController.swift
 //  LAOriginal
 //
-//  Created by Yuki Hirayama on 2022/09/19.
+//  Created by Yuki Hirayama on 2022/09/24.
 //
 
 import UIKit
 import RealmSwift
 import DropDown
 
-class AddViewController: UIViewController {
-
+class EditViewController: UIViewController {
+    
     let realm = try! Realm()
     
-    var addstory: Year!
+//    var addstory: Year!
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var dropdownView: UIView!
@@ -28,7 +28,6 @@ class AddViewController: UIViewController {
     let dropDown = DropDown()
     let categoryValues = ["なし", "思い出", "職歴", "資格"]
 
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +63,6 @@ class AddViewController: UIViewController {
             self.categoryLabel.text = categoryValues[index]
         }
 
-        
         // Do any additional setup after loading the view.
     }
     
@@ -79,23 +77,6 @@ class AddViewController: UIViewController {
     
     @IBAction func showCategoriesOptions() {
         dropDown.show()
-    }
-    
-    @IBAction func save() {
-        let newstory = Story()
-        
-        newstory.title = titleTextField.text!
-        newstory.category = categoryLabel.text!
-        newstory.when = datePicker.date
-        newstory.memo = memoTextView.text!
-        
-        try! realm.write {
-            addstory.stories.append(newstory)
-        }
-        
-        print("addstory")
-        
-        performSegue(withIdentifier: "AddStory", sender: nil)
     }
     
 

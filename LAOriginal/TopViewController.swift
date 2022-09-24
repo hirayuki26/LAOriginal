@@ -19,16 +19,13 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        try! realm.write {
-            realm.deleteAll()
-        }
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        years = realm.objects(Year.self)
+        years = realm.objects(Year.self).sorted(byKeyPath: "displayName", ascending: true)
         
         yeartable.reloadData()
     }
@@ -52,8 +49,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "yearCell", for: indexPath)
         
-        cell.textLabel!.text = String(years[indexPath.row].displeyName)
-        print(years[indexPath.row].displeyName)
+        cell.textLabel!.text = String(years[indexPath.row].displayName)
+        print(years[indexPath.row].displayName)
         
         return cell
     }
