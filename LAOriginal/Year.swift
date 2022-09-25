@@ -21,5 +21,5 @@ class Story: Object {
     @objc dynamic var end: Date? = nil
     @objc dynamic var when: Date!
     @objc dynamic var memo: String = ""
-    @objc dynamic var photo: String = ""
+    @objc dynamic var imageURL: String = ""
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6620D10D7AE6922E111F3937 /* Pods_LAOriginal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCBA65FB1DE05E937ACFD4C6 /* Pods_LAOriginal.framework */; };
+		B609A73B28DF839E00DB8A51 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609A73A28DF839E00DB8A51 /* FilterViewController.swift */; };
 		B6B8867228D82F4D00FD8176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8867128D82F4D00FD8176 /* AppDelegate.swift */; };
 		B6B8867428D82F4D00FD8176 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8867328D82F4D00FD8176 /* SceneDelegate.swift */; };
 		B6B8867628D82F4D00FD8176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B8867528D82F4D00FD8176 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		39338E2172EFB5F763687036 /* Pods-LAOriginal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LAOriginal.debug.xcconfig"; path = "Target Support Files/Pods-LAOriginal/Pods-LAOriginal.debug.xcconfig"; sourceTree = "<group>"; };
 		9459FA2E77C881BF3096939E /* Pods-LAOriginal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LAOriginal.release.xcconfig"; path = "Target Support Files/Pods-LAOriginal/Pods-LAOriginal.release.xcconfig"; sourceTree = "<group>"; };
+		B609A73A28DF839E00DB8A51 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		B6B8866E28D82F4D00FD8176 /* LAOriginal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LAOriginal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B8867128D82F4D00FD8176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6B8867328D82F4D00FD8176 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				B6B8869228D834B100FD8176 /* Year.swift */,
 				B6B8869428DB73E500FD8176 /* AddYearViewController.swift */,
 				B6B8869628DF119000FD8176 /* EditViewController.swift */,
+				B609A73A28DF839E00DB8A51 /* FilterViewController.swift */,
 			);
 			path = LAOriginal;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				B6B8867228D82F4D00FD8176 /* AppDelegate.swift in Sources */,
 				B6B8869528DB73E500FD8176 /* AddYearViewController.swift in Sources */,
 				B6B8868F28D8339100FD8176 /* AddViewController.swift in Sources */,
+				B609A73B28DF839E00DB8A51 /* FilterViewController.swift in Sources */,
 				B6B8868D28D8338000FD8176 /* DetailViewController.swift in Sources */,
 				B6B8868B28D8333200FD8176 /* ListViewController.swift in Sources */,
 				B6B8867428D82F4D00FD8176 /* SceneDelegate.swift in Sources */,
@@ -395,8 +399,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 39T2J4KACU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LAOriginal/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "保存する画像をフォトライブラリから呼び出す";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -423,8 +429,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 39T2J4KACU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LAOriginal/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "保存する画像をフォトライブラリから呼び出す";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

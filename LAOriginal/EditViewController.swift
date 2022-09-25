@@ -13,7 +13,9 @@ class EditViewController: UIViewController {
     
     let realm = try! Realm()
     
-//    var addstory: Year!
+    var edityear: Year!
+    var editstory: Story!
+    var editindex: Int!
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var dropdownView: UIView!
@@ -26,10 +28,17 @@ class EditViewController: UIViewController {
     var datePicker: UIDatePicker = UIDatePicker()
     
     let dropDown = DropDown()
-    let categoryValues = ["なし", "思い出", "職歴", "資格"]
+    let categoryValues = ["カテゴリなし", "思い出", "職歴", "資格"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleTextField.text = editstory.title
+        categoryLabel.text = editstory.category
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        whenTextField.text = "\(formatter.string(from: editstory.when))"
+        memoTextView.text = editstory.memo
         
         memoTextView.layer.borderWidth = 0.1
         memoTextView.layer.cornerRadius = 5.0
@@ -66,6 +75,17 @@ class EditViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditStory" {
+            guard let destination = segue.destination as? DetailViewController else {
+                fatalError("Failed to prepare AddViewController.")
+            }
+            
+            destination.storydetail = edityear.stories[editindex]
+            print("sent")
+        }
+    }
+    
     @objc func done() {
         whenTextField.endEditing(true)
         
@@ -79,6 +99,22 @@ class EditViewController: UIViewController {
         dropDown.show()
     }
     
+    @IBAction func save() {
+        let editedstory = Story()
+        
+        editedstory.title = titleTextField.text!
+        editedstory.category = categoryLabel.text!
+        editedstory.when = datePicker.date
+        editedstory.memo = memoTextView.text!
+        
+        try! realm.write {
+            edityear.stories[editindex] = editedstory
+        }
+        
+        print("editstory")
+        
+        performSegue(withIdentifier: "EditStory", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

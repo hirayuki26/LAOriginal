@@ -15,7 +15,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var storytable: UITableView!
     
     var eachyear: Year!
-    var eachstories: List<Story>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +29,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         print(eachyear.stories.count)
         print(eachyear)
-        
-        eachstories = eachyear.stories
         
         storytable.reloadData()
     }
@@ -50,6 +47,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
 
                 destination.storydetail = eachyear.stories[indexPath.row]
+                destination.objindex = indexPath.row
+                destination.objyear = eachyear
             }
         }
     }

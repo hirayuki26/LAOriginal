@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import DropDown
 
-class AddViewController: UIViewController {
+class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let realm = try! Realm()
     
@@ -21,14 +21,19 @@ class AddViewController: UIViewController {
     //@IBOutlet var flagTextField: UITextField!
     @IBOutlet var whenTextField: UITextField!
     @IBOutlet var memoTextView: UITextView!
-    //@IBOutlet var photoTextField: UITextField!
+    
+    @IBOutlet var photoImageView: UIImageView!
     
     var datePicker: UIDatePicker = UIDatePicker()
     
     let dropDown = DropDown()
-    let categoryValues = ["なし", "思い出", "職歴", "資格"]
+    let categoryValues = ["カテゴリなし", "思い出", "職歴", "資格"]
+    
+    // ドキュメントディレクトリの「ファイルURL」（URL型）定義
+    var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    // ドキュメントディレクトリの「パス」（String型）定義
+    let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +86,24 @@ class AddViewController: UIViewController {
         dropDown.show()
     }
     
+    @IBAction func openAlbum() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            
+            picker.allowsEditing = true
+            
+            present(picker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        photoImageView.image = info[.editedImage] as? UIImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func save() {
         let newstory = Story()
         
@@ -88,6 +111,15 @@ class AddViewController: UIViewController {
         newstory.category = categoryLabel.text!
         newstory.when = datePicker.date
         newstory.memo = memoTextView.text!
+        
+        let image = photoImageView.image!
+        print(type(of: image))
+        print(image)
+        let filename = UUID.init().uuidString + ".jpg"
+        newstory.imageURL = filename
+        image.saveToDocuments(filename: filename)
+        
+//        try newstory.imageURL = documentDirectoryFileURL.absoluteString
         
         try! realm.write {
             addstory.stories.append(newstory)
@@ -97,6 +129,32 @@ class AddViewController: UIViewController {
         
         performSegue(withIdentifier: "AddStory", sender: nil)
     }
+    
+//    //保存するためのパスを作成する
+//    func createLocalDataFile() {
+//        // 作成するテキストファイルの名前
+//        let fileName = "\(NSUUID().uuidString).png"
+//
+//        // DocumentディレクトリのfileURLを取得
+//        if documentDirectoryFileURL != nil {
+//            // ディレクトリのパスにファイル名をつなげてファイルのフルパスを作る
+//            let path = documentDirectoryFileURL.appendingPathComponent(fileName)
+//            documentDirectoryFileURL = path
+//        }
+//    }
+//
+//    //画像を保存する関数の部分
+//    func saveImage() {
+//        createLocalDataFile()
+//        //pngで保存する場合
+//        let pngImageData = photoImageView.image?.pngData()
+//        do {
+//            try pngImageData!.write(to: documentDirectoryFileURL)
+//        } catch {
+//            //エラー処理
+//            print("エラー")
+//        }
+//    }
     
 
     /*
@@ -109,4 +167,18 @@ class AddViewController: UIViewController {
     }
     */
 
+}
+
+extension UIImage {
+    func saveToDocuments(filename: String) {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent(filename)
+        if let data = self.jpegData(compressionQuality: 1.0) {
+            do {
+                try data.write(to: fileURL)
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
