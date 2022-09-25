@@ -29,11 +29,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     let dropDown = DropDown()
     let categoryValues = ["カテゴリなし", "思い出", "職歴", "資格"]
     
-    // ドキュメントディレクトリの「ファイルURL」（URL型）定義
-    var documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    // ドキュメントディレクトリの「パス」（String型）定義
-    let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,14 +107,12 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         newstory.when = datePicker.date
         newstory.memo = memoTextView.text!
         
-        let image = photoImageView.image!
-        print(type(of: image))
-        print(image)
-        let filename = UUID.init().uuidString + ".jpg"
-        newstory.imageURL = filename
-        image.saveToDocuments(filename: filename)
-        
-//        try newstory.imageURL = documentDirectoryFileURL.absoluteString
+        if photoImageView.image != nil {
+            let image = photoImageView.image!
+            let filename = UUID.init().uuidString + ".jpg"
+            newstory.imageURL = filename
+            image.saveToDocuments(filename: filename)
+        }
         
         try! realm.write {
             addstory.stories.append(newstory)
@@ -129,32 +122,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         
         performSegue(withIdentifier: "AddStory", sender: nil)
     }
-    
-//    //保存するためのパスを作成する
-//    func createLocalDataFile() {
-//        // 作成するテキストファイルの名前
-//        let fileName = "\(NSUUID().uuidString).png"
-//
-//        // DocumentディレクトリのfileURLを取得
-//        if documentDirectoryFileURL != nil {
-//            // ディレクトリのパスにファイル名をつなげてファイルのフルパスを作る
-//            let path = documentDirectoryFileURL.appendingPathComponent(fileName)
-//            documentDirectoryFileURL = path
-//        }
-//    }
-//
-//    //画像を保存する関数の部分
-//    func saveImage() {
-//        createLocalDataFile()
-//        //pngで保存する場合
-//        let pngImageData = photoImageView.image?.pngData()
-//        do {
-//            try pngImageData!.write(to: documentDirectoryFileURL)
-//        } catch {
-//            //エラー処理
-//            print("エラー")
-//        }
-//    }
     
 
     /*
@@ -167,18 +134,4 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     */
 
-}
-
-extension UIImage {
-    func saveToDocuments(filename: String) {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileURL = documentsDirectory.appendingPathComponent(filename)
-        if let data = self.jpegData(compressionQuality: 1.0) {
-            do {
-                try data.write(to: fileURL)
-            } catch {
-                print(error)
-            }
-        }
-    }
 }

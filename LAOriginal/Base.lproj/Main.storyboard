@@ -201,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aHu-P6-Gsk">
-                                <rect key="frame" x="36" y="350" width="314" height="245"/>
+                                <rect key="frame" x="36" y="350" width="314" height="159"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -231,6 +231,43 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="写真" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-il-D75">
+                                <rect key="frame" x="54" y="575" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQS-Of-Xrs">
+                                <rect key="frame" x="117" y="549" width="76" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8f-AX-qYg">
+                                <rect key="frame" x="310" y="563" width="40" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="openAlbum" destination="Rua-w3-qA3" eventType="touchUpInside" id="kyY-jX-BX6"/>
+                                    <action selector="openAlbum" destination="Sl7-UA-mTW" eventType="touchUpInside" id="uPS-lx-aKB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7w-sP-7xF">
+                                <rect key="frame" x="218" y="575" width="84" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="取り消し">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="13"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deletePhoto" destination="Rua-w3-qA3" eventType="touchUpInside" id="ZaK-RJ-orU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BWV-6w-YD2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -246,6 +283,7 @@
                         <outlet property="categoryLabel" destination="oHS-SQ-AFI" id="dtC-9h-HwN"/>
                         <outlet property="dropdownView" destination="noh-Ci-LxR" id="AGh-UU-9uH"/>
                         <outlet property="memoTextView" destination="aHu-P6-Gsk" id="sn4-tH-PkW"/>
+                        <outlet property="photoImageView" destination="xQS-Of-Xrs" id="Xf3-XG-qGY"/>
                         <outlet property="titleTextField" destination="IY2-oW-PX1" id="F73-Bt-ASP"/>
                         <outlet property="whenTextField" destination="Z8D-lA-s0T" id="FJw-Lv-66R"/>
                         <segue destination="ZEw-BN-u2P" kind="unwind" identifier="EditStory" unwindAction="unwindToDetailControllerWithSegue:" id="H8n-pK-nyd"/>
@@ -254,7 +292,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afr-u5-xVQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ZEw-BN-u2P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2998" y="1062"/>
+            <point key="canvasLocation" x="2996.9230769230767" y="1061.3744075829384"/>
         </scene>
         <!--Title-->
         <scene sceneID="hL7-yT-akj">
@@ -585,6 +623,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

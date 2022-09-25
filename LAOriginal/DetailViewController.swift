@@ -36,9 +36,15 @@ class DetailViewController: UIViewController {
         categoryLabel.text = storydetail.category
         memoLabel.text = storydetail.memo
         
-        let filename = storydetail.imageURL
-        let newImage = UIImage.getFromDocuments(filename: filename)
-        showImageView.image = newImage
+        if storydetail.imageURL != "" {
+            let filename = storydetail.imageURL
+            let newImage = UIImage.getFromDocuments(filename: filename)
+            showImageView.image = newImage
+        } else {
+            showImageView.image = nil
+        }
+        
+        print(showImageView.image)
         
         // Do any additional setup after loading the view.
     }
@@ -54,9 +60,13 @@ class DetailViewController: UIViewController {
         categoryLabel.text = storydetail.category
         memoLabel.text = storydetail.memo
         
-        let filename = storydetail.imageURL
-        let newImage = UIImage.getFromDocuments(filename: filename)
-        showImageView.image = newImage
+        if storydetail.imageURL != "" {
+            let filename = storydetail.imageURL
+            let newImage = UIImage.getFromDocuments(filename: filename)
+            showImageView.image = newImage
+        } else {
+            showImageView.image = nil
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,11 +97,3 @@ class DetailViewController: UIViewController {
 
 }
 
-extension UIImage {
-    static func getFromDocuments(filename: String) -> UIImage {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let data = try! Data(contentsOf: documentsDirectory.appendingPathComponent(filename))
-        let image = UIImage(data: data)
-        return image!
-    }
-}

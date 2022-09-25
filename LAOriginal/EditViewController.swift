@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import DropDown
 
-class EditViewController: UIViewController {
+class EditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let realm = try! Realm()
     
@@ -25,6 +25,8 @@ class EditViewController: UIViewController {
     @IBOutlet var memoTextView: UITextView!
     //@IBOutlet var photoTextField: UITextField!
     
+    @IBOutlet var photoImageView: UIImageView!
+    
     var datePicker: UIDatePicker = UIDatePicker()
     
     let dropDown = DropDown()
@@ -39,6 +41,12 @@ class EditViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         whenTextField.text = "\(formatter.string(from: editstory.when))"
         memoTextView.text = editstory.memo
+        
+        if editstory.imageURL != "" {
+            let filename = editstory.imageURL
+            let newImage = UIImage.getFromDocuments(filename: filename)
+            photoImageView.image = newImage
+        }
         
         memoTextView.layer.borderWidth = 0.1
         memoTextView.layer.cornerRadius = 5.0
@@ -99,6 +107,28 @@ class EditViewController: UIViewController {
         dropDown.show()
     }
     
+    @IBAction func openAlbum() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            
+            picker.allowsEditing = true
+            
+            present(picker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        photoImageView.image = info[.editedImage] as? UIImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deletePhoto() {
+        photoImageView.image = nil
+    }
+    
     @IBAction func save() {
         let editedstory = Story()
         
@@ -106,6 +136,15 @@ class EditViewController: UIViewController {
         editedstory.category = categoryLabel.text!
         editedstory.when = datePicker.date
         editedstory.memo = memoTextView.text!
+        
+        if photoImageView.image != nil {
+            let image = photoImageView.image!
+            let filename = UUID.init().uuidString + ".jpg"
+            editedstory.imageURL = filename
+            image.saveToDocuments(filename: filename)
+        } else {
+            editedstory.imageURL = ""
+        }
         
         try! realm.write {
             edityear.stories[editindex] = editedstory
