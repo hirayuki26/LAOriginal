@@ -57,6 +57,19 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         datePicker.datePickerMode = UIDatePicker.Mode.date
         datePicker.timeZone = NSTimeZone.local
         datePicker.locale = Locale.current
+        
+        let minDateString = String(edityear.displayName) + "-01-01"
+        let maxDateString = String(edityear.displayName) + "-12-31"
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        var minDate = dateFormatter.date(from: minDateString)
+        var maxDate = dateFormatter.date(from: maxDateString)
+
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
+        
         whenTextField.inputView = datePicker
         
         datePicker.preferredDatePickerStyle = .wheels
@@ -146,13 +159,28 @@ class EditViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             editedstory.imageURL = ""
         }
         
-        try! realm.write {
-            edityear.stories[editindex] = editedstory
+        if titleTextField.text == Optional("") {
+            let alert: UIAlertController = UIAlertController(title: "保存エラー", message: "タイトルを入力してください", preferredStyle: .alert)
+            
+            alert.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: { action in
+                        print("push OK button")
+                    }
+                )
+            )
+            present(alert, animated: true, completion: nil)
+        } else {
+            try! realm.write {
+                edityear.stories[editindex] = editedstory
+            }
+            
+            print("editstory")
+            
+            performSegue(withIdentifier: "EditStory", sender: nil)
         }
-        
-        print("editstory")
-        
-        performSegue(withIdentifier: "EditStory", sender: nil)
     }
 
     /*

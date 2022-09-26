@@ -41,6 +41,19 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         datePicker.datePickerMode = UIDatePicker.Mode.date
         datePicker.timeZone = NSTimeZone.local
         datePicker.locale = Locale.current
+        
+        let minDateString = String(addstory.displayName) + "-01-01"
+        let maxDateString = String(addstory.displayName) + "-12-31"
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        var minDate = dateFormatter.date(from: minDateString)
+        var maxDate = dateFormatter.date(from: maxDateString)
+
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
+        
         whenTextField.inputView = datePicker
         
         datePicker.preferredDatePickerStyle = .wheels
@@ -53,6 +66,10 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         
         whenTextField.inputView = datePicker
         whenTextField.inputAccessoryView = toolbar
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        whenTextField.text = "\(formatter.string(from: datePicker.date))"
         
         dropDown.anchorView = dropdownView // UIView or UIBarButtonItem
         dropDown.dataSource = categoryValues
@@ -81,8 +98,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         dropDown.show()
     }
     
-    @IBAction func openAlbum() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+    @IBAction func openAlbum() {        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
@@ -114,13 +130,28 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             image.saveToDocuments(filename: filename)
         }
         
-        try! realm.write {
-            addstory.stories.append(newstory)
+        if titleTextField.text == Optional("") {
+            let alert: UIAlertController = UIAlertController(title: "保存エラー", message: "タイトルを入力してください", preferredStyle: .alert)
+            
+            alert.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: { action in
+                        print("push OK button")
+                    }
+                )
+            )
+            present(alert, animated: true, completion: nil)
+        } else {
+            try! realm.write {
+                addstory.stories.append(newstory)
+            }
+            
+            print("addstory")
+            
+            performSegue(withIdentifier: "AddStory", sender: nil)
         }
-        
-        print("addstory")
-        
-        performSegue(withIdentifier: "AddStory", sender: nil)
     }
     
 

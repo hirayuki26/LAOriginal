@@ -13,7 +13,6 @@ class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     let realm = try! Realm()
     
-//    @IBOutlet var yearTextField: UITextField!
     @IBOutlet var yearTextLabel: UILabel!
     @IBOutlet var pickerView: UIPickerView!
     
@@ -25,46 +24,13 @@ class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        datePicker.datePickerMode = UIDatePicker.Mode.date
-//        datePicker.timeZone = NSTimeZone.local
-//        datePicker.locale = Locale.current
-//        yearTextField.inputView = datePicker
-//
-//        datePicker.preferredDatePickerStyle = .wheels
         
         pickerView.delegate = self
         pickerView.dataSource = self
         
         yearTextLabel.text = String(years[0])
-        
-//        yearTextField = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-//
-//        let yearPickerView = UIPickerView()
-//        yearPickerView.delegate = self
-//        yearPickerView.delegate = self
-//        yearTextField.inputView = yearPickerView
-        
-//        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
-//        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-//        let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
-//        toolbar.setItems([spacelItem, doneItem], animated: true)
-        
-    
-//        yearTextField.inputView = datePicker
-//        yearTextField.inputAccessoryView = toolbar
-        // Do any additional setup after loading the view.
     }
-    
-//    @objc func done() {
-//        yearTextField.endEditing(true)
-//
-////        let formatter = DateFormatter()
-////        formatter.dateFormat = "yyyy-MM-dd"
-////
-////        yearTextField.text = "\(formatter.string(from: datePicker.date))"
-//    }
-//
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -84,61 +50,40 @@ class AddYearViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView,
                     didSelectRow row: Int,
                     inComponent component: Int) {
-        
-        newYear.displayName = years[row]
         yearTextLabel.text = String(years[row])
     }
     
     @IBAction func done() {
         
         print("あ")
+        newYear.displayName = Int(yearTextLabel.text!)!
         
-        try! realm.write {
-            realm.add(newYear)
-            print(newYear.displayName)
-            print("success")
+        let sameyear = realm.objects(Year.self).filter("displayName == \(newYear.displayName)")
+        print(sameyear.count)
+        
+        if sameyear.count != 0 {
+            let alert: UIAlertController = UIAlertController(title: "追加エラー", message: "すでに追加されています", preferredStyle: .alert)
+            
+            alert.addAction(
+                UIAlertAction(
+                    title: "別の年を追加",
+                    style: .default,
+                    handler: { action in
+                        print("push OK button")
+                    }
+                )
+            )
+            present(alert, animated: true, completion: nil)
+        } else {
+            try! realm.write {
+                realm.add(newYear)
+                print(newYear.displayName)
+                print("success")
+            }
+            
+            performSegue(withIdentifier: "AddYear", sender: nil)
         }
-        
-        performSegue(withIdentifier: "AddYear", sender: nil)
     }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if component == 0 {
-//            return "\(years[row])年"
-//        } else {
-//            return nil
-//        }
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        let year = years[pickerView.selectedRow(inComponent: 0)]
-//        yearTextField.text = "\(year)年"
-//    }
-//
-//    func setKeyboardAccessory() {
-//        let keyboardAccessory = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
-//        keyboardAccessory.backgroundColor = UIColor.white
-//        yearTextField.inputAccessoryView = keyboardAccessory
-//
-//        let topBorder = UIView(frame: CGRect(x: 0, y: 0, width: keyboardAccessory.bounds.size.width, height: 0.5))
-//        topBorder.backgroundColor = UIColor.lightGray
-//        keyboardAccessory.addSubview(topBorder)
-//
-//        let completeButton = UIButton(frame: CGRect(x: keyboardAccessory.bounds.size.width - 48, y: 0, width: 48, height: keyboardAccessory.bounds.size.height - 0.5 * 2))
-//        completeButton.setTitle("完了", for: UIControl.State())
-//        completeButton.setTitleColor(UIColor.red, for: .highlighted)
-//        completeButton.addTarget(self, action: Selector(("hidePickerView")), for: .touchUpInside)
-//        keyboardAccessory.addSubview(completeButton)
-//
-//        let bottomBorder = UIView(frame: CGRect(x: 0, y: keyboardAccessory.bounds.size.height - 0.5, width: keyboardAccessory.bounds.size.width, height: 0.5))
-//        bottomBorder.backgroundColor = UIColor.lightGray
-//        keyboardAccessory.addSubview(bottomBorder)
-//    }
-//
-//    func hidePickerView() {
-//        yearTextField.resignFirstResponder()
-//    }
-
     
 
     /*
