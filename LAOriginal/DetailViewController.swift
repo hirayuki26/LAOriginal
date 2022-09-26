@@ -84,6 +84,13 @@ class DetailViewController: UIViewController {
     @IBAction func unwindToDetailController(segue: UIStoryboardSegue) {
     }
     
+    @IBAction func delete() {
+        try! realm.write {
+            objyear.stories.remove(at: objindex)
+        }
+        performSegue(withIdentifier: "deleteStory", sender: nil)
+    }
+    
 
     /*
     // MARK: - Navigation
