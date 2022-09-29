@@ -1,15 +1,15 @@
 //
-//  DetailViewController.swift
+//  FilterDetailViewController.swift
 //  LAOriginal
 //
-//  Created by Yuki Hirayama on 2022/09/19.
+//  Created by Yuki Hirayama on 2022/09/30.
 //
 
 import UIKit
 import RealmSwift
 
-class DetailViewController: UIViewController {
-    
+class FilterDetailViewController: UIViewController {
+
     let realm = try! Realm()
     
     var storydetail: Story!
@@ -44,8 +44,6 @@ class DetailViewController: UIViewController {
             showImageView.image = nil
         }
         
-        print(showImageView.image)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -67,12 +65,14 @@ class DetailViewController: UIViewController {
         } else {
             showImageView.image = nil
         }
+        
+        print("a")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toEdit" {
-            guard let destination = segue.destination as? EditViewController else {
-                fatalError("Failed to prepare EditViewController.")
+        if segue.identifier == "toFilterEdit" {
+            guard let destination = segue.destination as? FilterEditViewController else {
+                fatalError("Failed to prepare FilterEditViewController.")
             }
             
             destination.editstory = storydetail
@@ -81,15 +81,14 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindToDetailController(segue: UIStoryboardSegue) {
+    @IBAction func unwindToFilterDetailController(segue: UIStoryboardSegue) {
     }
     
     @IBAction func delete() {
         try! realm.write {
             objyear.stories.remove(at: objindex)
         }
-        
-        performSegue(withIdentifier: "deleteStory", sender: nil)
+        performSegue(withIdentifier: "deleteToFilter", sender: nil)
     }
     
 
@@ -104,4 +103,3 @@ class DetailViewController: UIViewController {
     */
 
 }
-

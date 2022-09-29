@@ -40,7 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             destination.addstory = eachyear
-        } else if segue.identifier == "toDetail" {
+        } else if segue.identifier == "ListToDetail" {
             if let indexPath = storytable.indexPathForSelectedRow {
                 guard let destination = segue.destination as? DetailViewController else {
                     fatalError("Failed to prepare DetailViewController.")
